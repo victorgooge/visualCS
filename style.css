@@ -8,6 +8,7 @@ body {
 .container {
   margin-top: 50px;
   height: 800px;
+  position: relative;
   background-color: #f8f8f8;
   border: 1px solid #ccc;
 }
@@ -19,10 +20,10 @@ body {
 }
 
 .node {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background-color: white;
-  border: 6px solid black;
+  border: 4px solid black;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -34,14 +35,42 @@ body {
 }
 
 .node.visited {
-  background-color: rgb(122, 180, 255);
+  background-color: rgb(121, 238, 147);
 }
 
 .edge {
   position: absolute;
   background-color: black;
-  height: 3px;
+  height: 1px;
   transform-origin: 0 0;
+}
+
+.array-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.array-element {
+  width: 50px;
+  height: 50px;
+  border: 3px solid black;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.array-element.visited {
+  background-color: rgb(121, 238, 147);
+  color: black;
 }
 
 button {

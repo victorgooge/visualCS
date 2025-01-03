@@ -1,6 +1,10 @@
 // TREE ILLUSTRATION
 const treeContainer = document.getElementById("tree");
+const arrayContainer = document.getElementById("arrayContainer");
 let traversalTimeouts = []; // array to store timeouts for traversal animations
+// EXAMPLE
+const binaryTree = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, null, null, 12, 13];
+const nodes = drawTree(binaryTree);
 
 function drawNode(x, y, value) {
     const node = document.createElement("div");
@@ -47,8 +51,8 @@ function drawTree(arr) {
             const leftX = x - childXOffset;
             const leftY = y + yOffset;
             drawEdge(
-                x + nodeRadius, 
-                y + nodeRadius * 2, 
+                x + nodeRadius * 1.2, 
+                y + nodeRadius * 2.2, 
                 leftX + nodeRadius, 
                 leftY
             );
@@ -61,8 +65,8 @@ function drawTree(arr) {
             const rightX = x + childXOffset;
             const rightY = y + yOffset;
             drawEdge(
-                x + nodeRadius, 
-                y + nodeRadius * 2, 
+                x + nodeRadius * 1.2, 
+                y + nodeRadius * 2.2, 
                 rightX + nodeRadius, 
                 rightY
             );
@@ -72,14 +76,19 @@ function drawTree(arr) {
 
     helper(0, treeContainer.offsetWidth / 2, 40, horizontalSpacing);
 
+    initializeEmptyVisualArray(arr);
+
     return nodes;
 }
 
-// EXAMPLE
-const binaryTree = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, null, null, 12, 13];
-const nodes = drawTree(binaryTree);
-
-
+function initializeEmptyVisualArray(arr) {
+    arrayContainer.innerHTML = ""; // clear array container
+    arr.forEach(() => {
+        const element = document.createElement("div");
+        element.classList.add("array-element");
+        arrayContainer.appendChild(element);
+    });
+}
 
 
 
@@ -90,12 +99,22 @@ function highlightNodes(order) {
     traversalTimeouts = []; // clear previous timeouts
     let delay = 0;
 
-    for (const index of order) {
+    order.forEach((index, i) => {
         const timeout = setTimeout(() => {
             nodes[index].classList.add("visited");
+            updateVisualArray(i, binaryTree[index]);
         }, delay);
-        traversalTimeouts.push(timeout); // store timeout ID
-        delay += 500; // delay for each node
+        traversalTimeouts.push(timeout);
+        delay += 1000;
+    });
+}
+
+function updateVisualArray(position, value) {
+    const arrayElements = document.querySelectorAll(".array-element");
+    const element = arrayElements[position];
+    if (element) {
+        element.classList.add("visited");
+        element.textContent = value;
     }
 }
 
@@ -108,6 +127,8 @@ function resetTree() {
     nodes.forEach(node => {
         if (node) node.classList.remove("visited");
     });
+
+    initializeEmptyVisualArray(binaryTree);
 }
 
 
