@@ -1,0 +1,17 @@
+div.section {
+    margin-top: 50px;
+}
+
+p.section-title {
+    font-size: larger;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+div.links {
+    margin-top: 0px;
+}
+
+div.links > a {
+    display: block;
+}
